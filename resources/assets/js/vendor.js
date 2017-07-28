@@ -32,8 +32,17 @@ window.Vue = require('vue');
 window.axios = require('axios');
 
 window.axios.defaults.headers.common = {
-    'X-Requested-With': 'XMLHttpRequest'
+    'X-Requested-With': 'XMLHttpRequest',
+
 };
+
+// window.axios.defaults.headers.common['X-CSRF-TOKEN'] = Colorpay.csrfToken;
+
+// Vue.http.interceptors.push((request, next) => {
+// 	request.headers.set('X-CSRF-TOKEN', Colorpay.csrfToken);
+
+// 	next();
+// });
 
 Vue.prototype.$http = axios;
 

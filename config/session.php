@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'driver' => env('SESSION_DRIVER', 'file'),
+    'driver' => env('SESSION_DRIVER', 'database'),
 
     /*
     |--------------------------------------------------------------------------
@@ -28,8 +28,8 @@ return [
     | to immediately expire on the browser closing, set that option.
     |
     */
-
-    'lifetime' => 120,
+    // expires in 7 days
+    'lifetime' => 10080,
 
     'expire_on_close' => false,
 
@@ -44,7 +44,7 @@ return [
     |
     */
 
-    'encrypt' => false,
+    'encrypt' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -83,7 +83,7 @@ return [
     |
     */
 
-    'table' => 'sessions',
+    'table' => 'laravel_sessions',
 
     /*
     |--------------------------------------------------------------------------
@@ -174,6 +174,6 @@ return [
     |
     */
 
-    'http_only' => true,
+    'http_only' => false,
 
 ];

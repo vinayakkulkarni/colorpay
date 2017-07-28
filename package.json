@@ -27,6 +27,7 @@
     "vue-sticky": "^3.1.5",
     "vue-sweetalert": "^0.1.17",
     "vue-toasted": "^1.0.23",
+    "vuejs-breadcrumbs": "^1.0.0",
     "vuex": "^2.3.1"
   }
 }

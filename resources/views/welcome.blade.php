@@ -5,15 +5,21 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Colorpay :: Dashboard</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
+        <!-- Styles -->
+        <link rel="stylesheet" href="{{ mix('assets/css/vendor.css') }}">
+        <link rel="stylesheet" href="{{ mix('assets/css/app.css') }}">
+        <script src="{{ mix('assets/js/manifest.js') }}"></script>
+        <script src="{{ mix('assets/js/vendor.js') }}"></script>
+        <script src="{{ mix('assets/js/app.js') }}"></script>
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
+                background: linear-gradient(#e95f62,#f286a0) no-repeat 50% fixed;
+                background-size: cover;
                 color: #636b6f;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
@@ -26,9 +32,9 @@
             }
 
             .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
+                align-items: center !important;
+                display: flex !important;
+                justify-content: center !important;
             }
 
             .position-ref {
@@ -51,7 +57,7 @@
 
             .links > a {
                 color: #636b6f;
-                padding: 0 25px;
+                padding: 0 30px;
                 font-size: 12px;
                 font-weight: 600;
                 letter-spacing: .1rem;
@@ -61,6 +67,11 @@
 
             .m-b-md {
                 margin-bottom: 30px;
+                color: #eee;
+                text-shadow: 0 0.05em rgba(0,0,0,.17), 0 0.1em 0.25em rgba(0,0,0,.25);
+                font-weight: 900;
+                background-position: 50% 50%;
+                background-size: 95vw 80vw;
             }
         </style>
     </head>
@@ -69,27 +80,30 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
+                        <a class="ui basic purple button" href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
+                      <div class="ui basic large buttons">
+                        <a class="ui button" href="{{ url('/login') }}">Login</a>
+                        <a class="ui button" href="{{ url('/register') }}">Register</a>
+                      </div>
                     @endif
                 </div>
             @endif
 
-            <div class="content">
+            <div class="content" id="app">
                 <div class="title m-b-md">
-                    Laravel
+                    Colorpay
                 </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+                <checkout :plans="{{ $plans }}" :user="{{ auth()->user() }}"></checkout>
             </div>
         </div>
+        <script src="https://checkout.stripe.com/checkout.js"></script>
+        <script>
+          window.Colorpay = <?php echo json_encode([
+                  'csrfToken' => csrf_token(),
+                  'stripeKey' => config('services.stripe.key'),
+                  'user'  => auth()->user(),
+              ]); ?>
+        </script>
     </body>
 </html>

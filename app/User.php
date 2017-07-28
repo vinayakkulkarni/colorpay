@@ -2,12 +2,17 @@
 
 namespace App;
 
+use Laravel\Cashier\Billable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Billable;
+
+    protected $table = 'users';
+
+    protected $primaryKey = 'id';
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +20,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'company_name', 'password',
+    ];
+
+    protected $attributes = [
+        'name'              => null,
+        'email'             => null,
+        'company_name'      => null,
+        'password'          => null
     ];
 
     /**
@@ -26,4 +38,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'user_id');
+    }
+
+    public function charges()
+    {
+        return $this->hasMany(Charge::class, 'user_id');
+    }
 }

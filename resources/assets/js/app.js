@@ -6,14 +6,17 @@
 
 require('./vendor');
 require('./semantic-ui-tablesort');
+require('./app/custom');
 window.NProgress = require('nprogress');
-NProgress.configure({ showSpinner: false, trickleSpeed: 1000, easing: 'ease', speed: 500, minimum: 0.3 });
+NProgress.configure({ showSpinner: false, trickleSpeed: 1000, easing: 'ease', speed: 700, minimum: 0.3 });
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+Vue.component('checkout', require('./components/checkout.vue'));
 
 import VueRouter from 'vue-router';
 Vue.use(VueRouter);
@@ -29,7 +32,6 @@ Vue.use(VueSweetAlert);
 // Toast Notification - https://github.com/shakee93/vue-toasted
 import Toasted from 'vue-toasted';
 Vue.use(Toasted, {position: 'bottom-right', duration: 3000});
-
 
 // Register a global custom directive called v-tablesort
 Vue.directive('tablesort', {
