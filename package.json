@@ -10,12 +10,12 @@
   "devDependencies": {
     "axios": "^0.21.1",
     "chart.js": "^2.4.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "jquery": "^3.2.0",
     "laravel-mix": "^0.10.0",
     "lodash": "^4.17.21",
     "moment": "2.17.1",
-    "semantic-ui": "^2.2.13",
+    "semantic-ui": "^2.5.0",
     "uuid": "^3.0.1",
     "vue": "^2.4.4",
     "vue-scrollTo": "^2.3.2"
